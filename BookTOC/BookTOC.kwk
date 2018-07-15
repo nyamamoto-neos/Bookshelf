@@ -1,0 +1,120 @@
+<project id="BookTOC">
+  <settings>
+    <name>BookTOC</name>
+    <media>Book</media>
+    <device>Ultimate Config</device>
+    <OS>all</OS>
+    <zoom>zoomStretch</zoom>
+    <width>1920</width>
+    <height>1280</height>
+    <orientation>Landscape</orientation>
+    <resolution>264</resolution>
+    <bookmark>false</bookmark>
+    <swipe>false</swipe>
+    <pinch>false</pinch>
+    <thumbs>false</thumbs>
+    <navigation>false</navigation>
+    <swipeSpacer>120</swipeSpacer>
+    <thumbW>200</thumbW>
+    <navDirection>Top</navDirection>
+    <thumbH>133</thumbH>
+    <bidi>false</bidi>
+    <rotation>false</rotation>
+    <suspend>false</suspend>
+    <preload>false</preload>
+    <startPage>1</startPage>
+    <endPage>2</endPage>
+    <endAuto>true</endAuto>
+    <expansion>false</expansion>
+    <googleKey>copy&amp;paste your key here</googleKey>
+    <iAds>false</iAds>
+    <iAdsKey></iAdsKey>
+    <adMob>false</adMob>
+    <adMobKey></adMobKey>
+    <adAll>false</adAll>
+    <adX>0</adX>
+    <adY>0</adY>
+    <inApp>
+      <mode>book</mode>
+      <prod id="book01">
+        <appleID>a01</appleID>
+        <googleID>g01</googleID>
+        <amazonID>z01</amazonID>
+        <name>book01</name>
+        <numOfPages>6</numOfPages>
+        <desc>book 01</desc>
+        <ver/>
+      </prod>
+      <prod id="book02">
+        <appleID>book02</appleID>
+        <googleID/>
+        <amazonID/>
+        <name>book02</name>
+        <numOfPages>3</numOfPages>
+        <desc>book 02</desc>
+        <ver/>
+      </prod>
+    </inApp>
+    <appID></appID>
+    <iconReady>false</iconReady>
+    <languages>
+      <lang id="en">
+        <langID>en</langID>
+        <name>English</name>
+        <bidi>false</bidi>
+      </lang>
+    </languages>
+    <pageCurl>false</pageCurl>
+    <bookshelf>embedded</bookshelf>
+    <downlodable>false</downlodable>
+    <downloadable>false</downloadable>
+    <serverURL>http://localhost:8080/bookshelf/</serverURL>
+    <tocPage>1</tocPage>
+    <infoPage>2</infoPage>
+    <iapDebug>true</iapDebug>
+    <kwik3Tp>false</kwik3Tp>
+    <keyNav>false</keyNav>
+    <domains></domains>
+  </settings>
+  <pages>
+    <page id="Shelf">
+      <name>Shelf</name>
+      <number>1</number>
+      <file>~\Documents\Kwik/BookTOC/Shelf.psd</file>
+      <fileName>Shelf.psd</fileName>
+      <trigger id="act_buy">
+        <name>act_buy</name>
+        <action id="buy_703">
+          <name>book01</name>
+          <type>Buy Product</type>
+          <inApp>book01</inApp>
+          <inAppID/>
+          <hide>false</hide>
+        </action>
+        <action id="buy_877">
+          <name>book02</name>
+          <type>Buy Product</type>
+          <inApp>book02</inApp>
+          <inAppID/>
+          <hide>false</hide>
+        </action>
+      </trigger>
+    </page>
+    <page id="INFO">
+      <number>2</number>
+      <name>INFO</name>
+      <file>~\Documents\Kwik/BookTOC/INFO.psd</file>
+      <fileName>INFO.psd</fileName>
+      <replacement id="infoTxt">
+        <name>infoTxt</name>
+        <type>Text</type>
+        <layer>infoTxt</layer>
+        <useNative>true</useNative>
+        <isParagraph>true</isParagraph>
+        <vOffset>0</vOffset>
+        <hOffset>5</hOffset>
+        <hPad>0</hPad>
+      </replacement>
+    </page>
+  </pages>
+</project>

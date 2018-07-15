@@ -1,0 +1,6 @@
+local model       = require("components.store.model")
+local ui          = require("components.store.UI").new()
+_M.cmd         = require("components.store.command").new()
+ui:init(sceneGroup, layer, true)
+_M.cmd:init(ui)
+ui:create(model.currentEpsode)

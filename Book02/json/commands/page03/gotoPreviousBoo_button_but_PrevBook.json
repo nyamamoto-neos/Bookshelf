@@ -1,0 +1,1 @@
+{"actions":[{"external":{"externalCode":{"arqCode":"local ui = require(\"components.store.UI\")\nui.gotoScenePreviousBook()","triggerName":"but_PrevBook_code_279","myLName":"","year":"2016, 2017, 2018","vers":"4.1.0","today":"Saturday, June 30 2018 12:36:10","custom":""}}}],"bfun":"but_PrevBook","triggerName":"but_PrevBook","custom":false}
