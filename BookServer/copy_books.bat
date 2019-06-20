@@ -22,7 +22,7 @@ copy ..\%1\*.txt ..\%1\build4\assets\audios\
 cd ..\%1\build4
 move assets %2%3
 rm ..\assets.zip
-"C:\Program Files (x86)\Corona Labs\Corona SDK\7za.exe" a ..\assets.zip %2%3
+"C:\Program Files (x86)\Corona Labs\Corona\7za.exe" a ..\assets.zip %2%3
 move %2%3 assets
 cd %~dp0
 mkdir  %fol%\%2%3
