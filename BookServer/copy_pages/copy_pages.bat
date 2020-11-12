@@ -1,6 +1,6 @@
 @echo off
 
-set fol=.\bookshelf
+set fol=..\bookshelf
 set proj=%HOMEPATH%\Documents\Kwik\BookShelfPages
 set server=%HOMEPATH%\Documents\Kwik\BookServer
 

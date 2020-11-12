@@ -1,4 +1,4 @@
-fol=./bookshelf
+fol=../bookshelf
 proj=~/Documents/Kwik/BookshelfPages
 server=~/Documents/Kwik/BookServer
 root=$(pwd)
