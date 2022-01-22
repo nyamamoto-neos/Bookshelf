@@ -378,8 +378,14 @@ end
 
 local function setSize(t, type, path)
     local attr = nil
-    if isFile(path .."/"..type..".zip") then
-        attr = lfs.attributes(path .."/"..type..".zip" )        
+    local _path = path .."/"..type..".zip"
+
+    if SYSTEM =="win32" then   
+        _path = _path:gsub('/', '\\')
+    end
+
+    if isFile(_path) then
+        attr = lfs.attributes(_path)        
     end
     if attr ~= nil then
         t[type]= {date = attr.modification, size=attr.size}
@@ -417,6 +423,17 @@ function calcSize(numOfpages, folder)
         file:write( output )
         io.close( file )
     end
+
+end
+
+M.calcSize = function(project, serverFolder)
+    bookProject = project
+    bookProjectInServer = serverFolder
+    -- process all pages
+    local numOfpages = readAssetJson("../../"..bookProject)
+    --
+    --
+    calcSize(numOfpages, "../"..bookServerFolder.."/"..bookProjectInServer)
 
 end
 
