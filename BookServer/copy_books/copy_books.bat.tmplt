@@ -1,0 +1,38 @@
+set fol=.\{{folder}}
+set BookServer={{BookServer}}
+
+@rem for simple bookshelf
+
+{{#books}}
+call :MyCopy {{project}} {{serverFolder}} {{suffix}} {{copyBackgroundImage}}
+{{/books}}
+
+@rem for bookshelf with versions
+@rem call :MyCopy Book01en book01 en true
+@rem call :MyCopy Book01jp book01 jp
+@rem call :MyCopy Book02en book02 en true
+@rem call :MyCopy Book02jp book02 jp
+
+exit
+
+:MyCopy
+echo MyCopy %1
+copy  copyright.txt ..\%1\build4\assets\copyright.txt
+copy ..\%1\build4\model.json  ..\%1\build4\assets\model.json
+copy ..\%1\*.mp3 ..\%1\build4\assets\audios\
+copy .\%1\*.txt ..\%1\build4\assets\audios\
+cd ..\%1\build4
+move assets %2%3
+del assets.zip
+"C:\Program Files (x86)\Corona Labs\Corona\7za.exe" a assets.zip %2%3
+move %2%3 assets
+cd ..\..\%BookServer%
+mkdir  %fol%\%2%3
+copy ..\%1\assets.zip %fol%\%2%3\assets.zip
+copy ..\%1\build4\assets\images\p1\bg.png  %fol%\%2%3\bg.png
+echo %4
+if "%4"=="true" (
+  mkdir  %fol%\%2
+  copy ..\%1\build4\assets\images\p1\bg.png  %fol%\%2\bg.png
+)
+

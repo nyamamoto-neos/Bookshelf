@@ -370,9 +370,9 @@ function copyJsons(bookServerFolder, bookProject)
 end
 
 function M.setServerFolder(sys, folder, parent)
-    SYSTEM     = sys
+    SYSTEM           = sys
     bookServerFolder = folder
-    ROOT = parent
+    ROOT             = parent
 end
 
 

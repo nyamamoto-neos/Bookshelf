@@ -1,0 +1,26 @@
+
+
+set fol=.\{{folder}}
+set BookServer={{BookServer}}
+set proj=..\{{project}}
+
+@rem for simple bookshelf
+
+{{#pages}}
+call :MyCopy {{episode}} {{page}}
+{{/pages}}
+
+exit
+
+:MyCopy
+echo %proj%\build4\assets\images\p%2
+mkdir %fol%\Episode0%1
+xcopy %proj%\build4\assets\images\p%2 %fol%\Episode0%1\assets\images\p%2 /D /S /R /Y /I /K
+copy  copyright.txt %fol%\Episode0%1\assets\images\p%2
+cd %fol%\Episode0%1
+"C:\Program Files (x86)\Corona Labs\Corona\7za.exe" a assets.zip assets
+cd ..\..
+copy %proj%\build4\assets\images\p%2\bg.png %fol%\Episode0%1\
+@rem rmdir /s /q %proj%\build4\assets\images\p%1
+exit /b
+

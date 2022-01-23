@@ -1,0 +1,23 @@
+@echo off
+set fol=.\{{folder}}
+set RootProject={{RootProject}}
+
+rmdir /s /q  App
+mkdir App
+
+{{#projects}}
+call :MyCopy {{project}} {{appFolder}}{{suffix}} {{downloadable}}
+{{/projects}}
+
+exit /b
+
+:MyCopy
+	xcopy  ..\%1\build4 App\%2 /D /S /R /Y /I /K
+	if "%3"=="true" (
+	  rmdir /s /q App\%2\assets
+	)
+	del App\%2\main.lua
+	del App\%2\config.lua
+	del App\%2\build.settings
+	del App\%2\assemble.command
+	del App\%2\assemble.bat
