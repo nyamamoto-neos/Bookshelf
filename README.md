@@ -1,17 +1,33 @@
-# Bookshelf Embedded sample 
+# Bookshelf Sample
 
-This repository is mainly aimed to update **extlib** folder of **BookshelfEmbedded** and to demonstrate how to use KwikShelf plugin of [Corona SDK](https://coronalabs.com).
+BookServer folder contains the following folders
 
-* http://kwiksher.com/doc/tutorials/kwik/bookshelf/bookshelf_embedded.html
+- bookshelf
 
-Bookshelf embedded sample uses KwikShelf plugin.
+  this folder contains the assets of downloadable books.
 
-* http://kwiksher.com/doc/tutorials/kwik/bookshelf/bookshelf_embedded_kwikshekf.html
+- compress_assets
 
-Book01, Book02 and BookTOC folders are the projects of [Kwik4](https://kwiksher.com)
+  for downloadManger V2, the assets of downloadable books are zipped with this tool
+
+  - https://kwiksher.com/doc/kwik_tutorial/bookshelf/embedded/bookshelf_embedded_server/
+
+- copy_books(obsolete)
+
+  for downloadMnager V1 the assets of books are zipped with this tool
+
+- copy_pages 
+
+  for BookshelfPages project, the assets of pages are zipped with this tool.
+
+  * https://kwiksher.com/doc/kwik_tutorial/bookshelf/pages/bookshelf_pages_server/
+
+
+Book01, Book02 and BookTOC folders are sample projects for Bookshelf sample.
 
 ---
 ## localhost
+
 BookServer you need to run http-server as localhost:8080
 
 for instance, http://localhost:8080/bookshelf/bg.png
