@@ -28,6 +28,7 @@ StoreManagerState.clickImage = _default
 StoreManagerState.clickImage = _default
 StoreManagerState.clickImage = _default
 StoreManagerState.clickPurchase = _default
+StoreManagerState.clickPurchase = _default
 StoreManagerState.createDialog = _default
 StoreManagerState.exit = _default
 StoreManagerState.fromDialog = _default
@@ -347,6 +348,21 @@ function DialogMap.IAPBadger:backThumbnail (fsm)
     fsm:popState()
 end
 
+function DialogMap.IAPBadger:clickCloseDialog (fsm)
+    local ctxt = fsm.owner
+    fsm:getState():Exit(fsm)
+    fsm:clearState()
+    local r, msg = pcall(
+        function ()
+            ctxt:refreshThumbnail()
+        end
+    )
+    fsm:popState()
+end
+
+function DialogMap.IAPBadger:clickPurchase (fsm)
+end
+
 function DialogMap.IAPBadger:onPurchaseCancel (fsm)
     local ctxt = fsm.owner
     fsm:getState():Exit(fsm)
@@ -438,13 +454,13 @@ function NetworkMap.Downloaded:backThumbnail (fsm)
     fsm:backThumbnail()
 end
 
-function NetworkMap.Downloaded:fromDialog (fsm, id)
+function NetworkMap.Downloaded:fromDialog (fsm, id, version)
     local ctxt = fsm.owner
     fsm:getState():Exit(fsm)
     fsm:clearState()
     local r, msg = pcall(
         function ()
-            ctxt:updateDialog(id)
+            ctxt:updateDialog(id, version)
         end
     )
     fsm:popState()
@@ -509,6 +525,12 @@ end
 function storeContext:clickImage (...)
     self.transition = 'clickImage'
     self:getState():clickImage(self, ...)
+    self.transition = nil
+end
+
+function storeContext:clickPurchase ()
+    self.transition = 'clickPurchase'
+    self:getState():clickPurchase(self)
     self.transition = nil
 end
 
@@ -618,7 +640,7 @@ function storeContext:enterStartState ()
     self:getState():Entry(self)
 end
 
-return
+return 
 storeContext
 -- Local variables:
 --  buffer-read-only: t

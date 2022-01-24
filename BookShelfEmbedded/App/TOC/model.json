@@ -1,34 +1,1 @@
-[
-{
-    "page":1, "alias":"Shelf", "isTmplt":false,
-        "bg":{ "x":960, "y":640, "width":1920, "height":1280, "alpha" :1 , "ext":"png" },
-        "rect12":{ "x":1489, "y":1052, "width":449, "height":222, "alpha" :1 , "ext":"png" },
-        "rect11":{ "x":960, "y":1052, "width":449, "height":222, "alpha" :1 , "ext":"png" },
-        "rect10":{ "x":431, "y":1052, "width":449, "height":222, "alpha" :1 , "ext":"png" },
-        "rect9":{ "x":1489, "y":777, "width":449, "height":222, "alpha" :1 , "ext":"png" },
-        "rect8":{ "x":960, "y":777, "width":449, "height":222, "alpha" :1 , "ext":"png" },
-        "rect7":{ "x":431, "y":777, "width":449, "height":222, "alpha" :1 , "ext":"png" },
-        "rect6":{ "x":1489, "y":502, "width":449, "height":222, "alpha" :1 , "ext":"png" },
-        "rect5":{ "x":960, "y":502, "width":449, "height":222, "alpha" :1 , "ext":"png" },
-        "rect4":{ "x":431, "y":502, "width":449, "height":222, "alpha" :1 , "ext":"png" },
-        "rect3":{ "x":1489, "y":227, "width":449, "height":222, "alpha" :1 , "ext":"png" },
-        "restoreBtn":{ "x":1715, "y":65, "width":233, "height":56, "alpha" :1 , "ext":"png" },
-        "purchaseBtn":{ "x":852, "y":682, "width":142, "height":29, "alpha" :1 , "ext":"png" },
-        "savingTxt":{ "x":985, "y":536, "width":122, "height":36, "alpha" :1 , "ext":"png" },
-        "savedBtn":{ "x":1030, "y":594, "width":95, "height":29, "alpha" :1 , "ext":"png" },
-        "downloadBtn":{ "x":1065, "y":682, "width":163, "height":29, "alpha" :1 , "ext":"png" },
-        "book02Icon":{ "x":960, "y":227, "width":449, "height":222, "alpha" :1 , "ext":"png" },
-        "book01Icon":{ "x":431, "y":227, "width":451, "height":222, "alpha" :1 , "ext":"png" },
-    },
-{
-    "page":2, "alias":"INFO", "isTmplt":false,
-        "bg":{ "x":946, "y":713, "width":1163, "height":951, "alpha" :1 , "ext":"png" },
-        "hideOverlayBtn":{ "x":1397, "y":332, "width":168, "height":59, "alpha" :1 , "ext":"png" },
-        "purchaseBtn":{ "x":852, "y":952, "width":142, "height":29, "alpha" :1 , "ext":"png" },
-        "savingTxt":{ "x":841, "y":866, "width":122, "height":36, "alpha" :1 , "ext":"png" },
-        "savedBtn":{ "x":1030, "y":864, "width":95, "height":29, "alpha" :1 , "ext":"png" },
-        "downloadBtn":{ "x":1065, "y":952, "width":163, "height":29, "alpha" :1 , "ext":"png" },
-        "bookXXIcon":{ "x":978, "y":587, "width":658, "height":434, "alpha" :1 , "ext":"png" },
-        "infoTxt":{ "x":905, "y":1083, "width":974, "height":49, "alpha" :1 , "ext":"png" },
-    },
-]
+[{    "page":1, "alias":"Shelf", "isTmplt":false,    },{    "page":2, "alias":"INFO", "isTmplt":false,    },]

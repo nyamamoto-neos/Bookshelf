@@ -7,8 +7,9 @@ local _Class = {}
 function _Class:createTabButFunction(UI, model)
    function model.obj:tap(event)
     event.UI = UI
-    if model.enabled or model.enabled == nil then
-      if model.btaps > 1 and event.numTaps then
+    if model.obj.enabled or model.obj.enabled == nil then
+      if model.btaps ~=nil and event.numTabs~=nil and 
+       model.btaps > 1 and event.numTaps then
         if event.numTaps == model.btaps then
             UI.scene:dispatchEvent({name=model.eventName, tap = event})
         end
