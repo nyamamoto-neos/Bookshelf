@@ -1,9 +1,8 @@
 -- copyright 2022, kwiksher
 --
 local command = require("compress_assets")
-local platform = system.getInfo("platform")
 --
-command.setServerFolder(platform, "bookshelf", "BookServer")
+command.setServerFolder("bookshelf", "BookServer")
 --
 local books = {
     {project = "Book01", serverFolder = "book01"},
@@ -31,7 +30,7 @@ local type         = "images"
     "thumbnails"
     "images"
     "shared"
-    ]] 
+    ]]
 --
 -- Handler that gets notified when the alert closes
 local function compressAll()
@@ -40,14 +39,14 @@ local function compressAll()
     for i=1, #books do
         local book = books[i]
     command.compress(book.project, book.serverFolder)
-    
+
     end
 
     -- thumbnail image in server, it is copied from page1, bg layer
     --
     for i=1, #onLineImages do
         local book = onLineImages[i]
-        command.setOnlineImage(book.project, book.serverFolder, book.image) 
+        command.setOnlineImage(book.project, book.serverFolder, book.image)
     end
 end
 ---
@@ -56,14 +55,20 @@ local function onComplete( event )
         local i = event.index
         if ( i == 1 ) then
             compressAll()
-            native.showAlert( "Kwik", "Done", { "OK", "Cancel" } )
+            native.showAlert( "Kwik", "Done", { "OK" },
+            function()
+              native.requestExit()
+            end )
         elseif ( i == 2 ) then
             command.updateAsset(project, serverFolder, page, type)
-            native.showAlert( "Kwik", "Done", { "OK", "Cancel" } )
+            native.showAlert( "Kwik", "Done", { "OK" },
+            function()
+              native.requestExit()
+            end )
         elseif ( i == 3 ) then
             print("cancelled")
+            native.requestExit()
         end
-        native.requestExit()
     end
 end
 

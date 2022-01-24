@@ -20,7 +20,7 @@ echo MyCopy %1
 copy  copyright.txt ..\%1\build4\assets\copyright.txt
 copy ..\%1\build4\model.json  ..\%1\build4\assets\model.json
 copy ..\%1\*.mp3 ..\%1\build4\assets\audios\
-copy .\%1\*.txt ..\%1\build4\assets\audios\
+copy ..\%1\*.txt ..\%1\build4\assets\audios\
 cd ..\%1\build4
 move assets %2%3
 del assets.zip
@@ -28,6 +28,7 @@ del assets.zip
 move %2%3 assets
 cd ..\..\%BookServer%
 mkdir  %fol%\%2%3
+del %fol%\%2%3\assets.zip
 copy ..\%1\assets.zip %fol%\%2%3\assets.zip
 copy ..\%1\build4\assets\images\p1\bg.png  %fol%\%2%3\bg.png
 echo %4

@@ -1,8 +1,14 @@
+--
+-- utility to archive asset page by page
+--
 local M = {}
--- 
---- utility to archive asset page by page
----
-local SYSTEM      = "win32"
+
+local platform  = system.getInfo("platform")
+print(platform)
+
+if not (platform =="win32" or platform =="macos") then
+    native.showAlert( "Kwik", "Please select Windows or macOS from View> View As > Custom", { "OK", "Cancel" })
+end
 
 local ROOT      = "BookServer"
 
@@ -38,9 +44,9 @@ local jsonFiles = {}
                 null
                 ]
     }
-    
 
-    model ={ 
+
+    model ={
         folder = "./hokkaido/AssetInfo",
         assets = {
             {page = 1, type="audios", files={"lame.wav"},
@@ -53,11 +59,11 @@ local jsonFiles = {}
         }
     }
     --]]
-    
+
 
 function insertAudios(page,data)
     local files = {}
-    for i=1, #data do 
+    for i=1, #data do
         if data[i] then
             table.insert(files, "audios/"..data[i])
         end
@@ -70,7 +76,7 @@ function  insertRead2me(page, data)
     for i=1, #data do
         local read2me = data[i]
         if read2me then
-            for j=1, #read2me.filenames do 
+            for j=1, #read2me.filenames do
                 if read2me.filenames[j] then
                     table.insert(files, "audios/"..read2me.foldername.."/"..read2me.filenames[j])
                 end
@@ -82,7 +88,7 @@ end
 
 function insertVideos(page, data)
     local files = {}
-    for i=1, #data do 
+    for i=1, #data do
         if data[i] then
             table.insert(files, "videos/"..data[i])
         end
@@ -92,7 +98,7 @@ end
 
 function insertPNGs(page, data)
     local files = {}
-    for i=1, #data do 
+    for i=1, #data do
         if data[i] then
             table.insert(files, "videos/"..data[i])
         end
@@ -102,7 +108,7 @@ end
 
 function insertSprites(page, data)
     local files = {}
-    for i=1, #data do 
+    for i=1, #data do
         if data[i] then
             table.insert(files, "sprites/"..data[i])
         end
@@ -112,7 +118,7 @@ end
 
 function insertParticles(page, data)
     local files = {}
-    for i=1, #data do 
+    for i=1, #data do
         if data[i] then
             table.insert(files, "particles/"..data[i].filename)
             table.insert(files, "particles/"..data[i].PNG)
@@ -123,7 +129,7 @@ end
 
 function insertWWW(page, data)
     local files = {}
-    for i=1, #data do 
+    for i=1, #data do
         if data[i] then
             table.insert(files, "WWW/"..data[i].filename)
             table.insert(files, "WWW/"..data[i].foldername)
@@ -134,7 +140,7 @@ end
 
 function insertThumbnails(page, data)
     local files = {}
-    for i=1, #data do 
+    for i=1, #data do
         if data[i] then
             table.insert(files, "thumbnails/"..data[i])
         end
@@ -144,7 +150,7 @@ end
 
 function insertImages(page, data)
     local files = {}
-    for i=1, #data do 
+    for i=1, #data do
         if data[i] then
             table.insert(files, "images/p"..page.."/"..data[i])
         end
@@ -154,7 +160,7 @@ end
 
 function insertShared(page, data)
     local files = {}
-    for i=1, #data do 
+    for i=1, #data do
         if data[i] then
             table.insert(files, "images/"..data[i])
         end
@@ -165,7 +171,7 @@ end
 
 function readAssetJson(bookProjectFolder)
     local path = system.pathForFile(bookProjectFolder.."/build4/assets/", system.ResourceDirectory )
-    print(path)
+    print("readAssetJson", path)
     local num = 0
    	for file in lfs.dir(path ) do
         print( "Found file: " .. file )
@@ -202,17 +208,17 @@ end
 
 function zip(model)
     local ext = "command"
-    local cmd
 
     local sandboxPath = system.pathForFile('', system.ResourceDirectory)
-    if SYSTEM =="win32" then
+    if platform =="win32" then
         ext = "bat"
         sandboxPath = sandboxPath:gsub('/', '\\')
     end
 
     local path = system.pathForFile( "compress_assets."..ext..".tmplt", system.ResourceDirectory )
     local file, errorString = io.open( path, "r" )
-    local cmdFile = "compress_assets_"..bookProject.."."..ext
+    local cmd = "compress_assets_"..bookProject.."."..ext
+    local cmdFile
 
     if not file then
         print( "File error: " .. errorString )
@@ -222,7 +228,7 @@ function zip(model)
         local lustache = require "lustache"
         output = lustache:render(contents, model)
 
-        local path = system.pathForFile(cmdFile, system.TemporaryDirectory)
+        local path = system.pathForFile(cmd, system.TemporaryDirectory)
         --print(path)
         local file, errorString = io.open( path, "w+" )
         if not file then
@@ -232,20 +238,21 @@ function zip(model)
             file:write( output )
             io.close( file )
         end
-        if SYSTEM =="win32" then
-            cmd = '"'..path:gsub('/', '\\')..'"'
+        if platform =="win32" then
+            cmdFile = '"'..path:gsub('/', '\\')..'"'
         else
-            cmd = path:gsub(' ','\\ ')
+            cmdFile = path:gsub(' ','\\ ')
         end
     end
 
-    if SYSTEM =="win32" then   
-        print("copy "..cmd.." "..system.pathForFile("", system.ResourceDirectory))
-        os.execute('start cmd /k call "'..system.pathForFile(cmdFile, system.TemporaryDirectory)..'"')
-        os.execute("copy "..cmd.." "..system.pathForFile("../", system.ResourceDirectory))
+    if platform =="win32" then
+        print("copy "..cmdFile.." "..system.pathForFile("", system.ResourceDirectory))
+        os.execute("copy "..cmdFile.." "..system.pathForFile("..\\", system.ResourceDirectory))
+        os.execute("cd "..system.pathForFile("..\\", system.ResourceDirectory) ..' & start cmd /k call '..cmd)
     else
-        os.execute('source '..cmd)
-        os.execute("cp "..cmd.." "..system.pathForFile("../", system.ResourceDirectory))
+        os.execute("cp "..cmdFile.." "..system.pathForFile("../", system.ResourceDirectory))
+        print("cd "..system.pathForFile("../", system.ResourceDirectory) ..'; source '..cmd)
+        os.execute("cd "..system.pathForFile("../", system.ResourceDirectory) ..'; source '..cmd)
     end
 end
 
@@ -276,7 +283,7 @@ function initAssetFolders(bookServerFolder, numOfpages)
     local _path = system.pathForFile(bookServerFolder, system.ResourceDirectory )
     -- Change current working directory
     local success = lfs.chdir( _path )  --returns true on success
-    
+
     if ( success ) then
         if not isFileOrDir(bookProjectInServer) then
             lfs.mkdir( bookProjectInServer)
@@ -284,7 +291,7 @@ function initAssetFolders(bookServerFolder, numOfpages)
             os.remove(system.pathForFile(bookServerFolder .."/"..bookProjectInServer, system.ResourceDirectory ))
             lfs.mkdir( bookProjectInServer)
         end
-        lfs.chdir(bookProjectInServer) 
+        lfs.chdir(bookProjectInServer)
         for i=1, numOfpages do
             lfs.mkdir( "p"..i)
         end
@@ -292,16 +299,16 @@ function initAssetFolders(bookServerFolder, numOfpages)
 end
 
 function createAssetPageFolder(bookServerFolder, bookProjectInServer, pageNum)
-    print(bookServerFolder, bookProjectInServer, pageNum)
+    print("createAssetPageFolder", bookServerFolder, bookProjectInServer, pageNum)
     local _path = system.pathForFile(bookServerFolder, system.ResourceDirectory )
     -- Change current working directory
     local success = lfs.chdir( _path )  --returns true on success
-    
+
     if ( success ) then
         if not isFileOrDir(bookProjectInServer) then
             lfs.mkdir( bookProjectInServer)
         end
-        lfs.chdir(bookProjectInServer) 
+        lfs.chdir(bookProjectInServer)
         if not isFileOrDir("p"..pageNum) then
             lfs.mkdir( "p"..pageNum)
         end
@@ -310,13 +317,13 @@ end
 
 function updateAsset(page, type)
     local path = system.pathForFile("../../"..bookProject.."/build4/assets/page"..page..".json", system.ResourceDirectory )
-    print(bookProject.."/build4/assets/page"..page..".json")
+    print("updateAsset", bookProject.."/build4/assets/page"..page..".json")
     local decoded, pos, msg = json.decodeFile( path )
     if not decoded then
         print( "Decode failed at "..tostring(pos)..": "..tostring(msg) )
         return
     end
-    if type=="audios" then 
+    if type=="audios" then
         insertAudios(decoded.page, decoded.aduios)
     elseif (type == "read2me") then
         insertRead2me(decoded.page, decoded.read2me)
@@ -346,7 +353,7 @@ function updateAsset(page, type)
     if not isFileOrDir(type..".zip") then
         os.remove(_path.."/"..type..".zip")
     end
-    zip({assets = pageAssets, folder = bookServerFolder.."/"..bookProjectInServer, 
+    zip({assets = pageAssets, folder = bookServerFolder.."/"..bookProjectInServer,
         assetFolder = system.pathForFile("../../"..bookProject.."/build4/assets", system.ResourceDirectory )})
 
 end
@@ -354,9 +361,9 @@ end
 
 function copyJsons(bookServerFolder, bookProject)
     local dst = system.pathForFile(bookServerFolder.."/"..bookProject, system.ResourceDirectory)
-    for i=1, #jsonFiles do 
+    for i=1, #jsonFiles do
         local path = jsonFiles[i]
-        if SYSTEM =="win32" then   
+        if platform =="win32" then
             local cmd = "copy "..path.." "..dst
             cmd = cmd:gsub('/', '\\')
             print(cmd)
@@ -369,8 +376,7 @@ function copyJsons(bookServerFolder, bookProject)
     end
 end
 
-function M.setServerFolder(sys, folder, parent)
-    SYSTEM           = sys
+function M.setServerFolder(folder, parent)
     bookServerFolder = folder
     ROOT             = parent
 end
@@ -380,12 +386,12 @@ local function setSize(t, type, path)
     local attr = nil
     local _path = path .."/"..type..".zip"
 
-    if SYSTEM =="win32" then   
+    if platform =="win32" then
         _path = _path:gsub('/', '\\')
     end
 
     if isFile(_path) then
-        attr = lfs.attributes(_path)        
+        attr = lfs.attributes(_path)
     end
     if attr ~= nil then
         t[type]= {date = attr.modification, size=attr.size}
@@ -448,7 +454,7 @@ function M.compress (project, serverFolder)
 
     zip({assets = pageAssets, folder = bookServerFolder.."/"..bookProjectInServer, BookServer = ROOT,
          assetFolder = system.pathForFile("../../"..bookProject.."/build4/assets", system.ResourceDirectory )})
-    
+
 
     calcSize(numOfpages, "../"..bookServerFolder.."/"..bookProjectInServer)
 
@@ -458,12 +464,12 @@ end
 function M.updateAsset(project, serverFolder, page, type)
     bookProject = project
     bookProjectInServer = serverFolder
-    
+
     createAssetPageFolder("../"..bookServerFolder, bookProjectInServer, page)
-    
+
     updateAsset(page, type)
 
-    -- process all pages 
+    -- process all pages
     local numOfpages = readAssetJson("../../"..bookProject)
 
     -- update size and date
@@ -478,20 +484,20 @@ function M.setOnlineImage(project, serverFolder, imagePath)
     bookProjectInServer = serverFolder
     local projectFolder = system.pathForFile("../../"..bookProject, system.ResourceDirectory )
     local path = projectFolder.."/"..imagePath
-    
+
     local _path = system.pathForFile("../"..bookServerFolder, system.ResourceDirectory )
     -- Change current working directory
     local success = lfs.chdir( _path )  --returns true on success
-    
+
     if ( success ) then
         if not isFileOrDir(bookProjectInServer) then
             lfs.mkdir( bookProjectInServer)
         end
     end
-    
-    local dst = system.pathForFile("../"..bookServerFolder.."/"..bookProjectInServer .."/", system.ResourceDirectory)
 
-    if SYSTEM =="win32" then   
+    local dst = system.pathForFile("../"..bookServerFolder.."/"..bookProjectInServer .."/", system.ResourceDirectory)
+    print("---setOnlineImage-----")
+    if platform =="win32" then
         local cmd = "copy "..path.." "..dst .."bg.png"
         cmd = cmd:gsub('/', '\\')
         print(cmd)
