@@ -1,5 +1,9 @@
 # Bookshelf Sample
 
+This Bookshelf folder is Project Root Folder of Kwik.
+
+<img src="./img/2022-01-24-14-49-08.png" width="600">
+
 ### BookServer
 
 BookServer folder contains the following folders
