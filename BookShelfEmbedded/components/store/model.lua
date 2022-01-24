@@ -1,0 +1,1 @@
+return require("App.TOC.components.store.model")
