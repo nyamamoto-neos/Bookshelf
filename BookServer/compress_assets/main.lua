@@ -13,25 +13,28 @@ local onLineImages = {
     {project = "Book01", serverFolder = "book01", image = "build4/assets/images/p1/bg@4x.png"},
     {project = "Book02", serverFolder = "book02", image = "build4/assets/images/p1/bg@4x.png"},
 }
---
+
 -- for instance update the video assets in page1
+--[[
 --
 local project      = "Book02"
 local serverFolder = "book02"
 local page         = 1
 local type         = "images"
---[[
-    "audios"
-    "read2me"
-    "PNGs"
-    "sprites"
-    "particles"
-    "WWW"
-    "thumbnails"
-    "images"
-    "shared"
-    ]]
---
+    -- please set one of the following types
+    -- "audios"
+    -- "read2me"
+    -- "PNGs"
+    -- "sprites"
+    -- "particles"
+    -- "WWW"
+    -- "thumbnails"
+    -- "images"
+    -- "shared"
+
+command.updateAsset(project, serverFolder, page, type)
+-- ]]
+
 -- Handler that gets notified when the alert closes
 local function compressAll()
     -- for all the pages in a project

@@ -1,10 +1,10 @@
 local M = {}
--- 
+--
 --- utility to archive asset page by page
 ---
 local platform  = system.getInfo("platform")
 
-if not (platform =="win32" or platform =="macOS") then
+if not (platform =="win32" or platform =="macos") then
     native.showAlert( "Kwik", "Please select Windows or macOS from View> View As > Custom", { "OK", "Cancel" })
 end
 
@@ -35,6 +35,7 @@ function copy_projects(model)
     local path = system.pathForFile( "copy_projects."..ext..".tmplt", system.ResourceDirectory )
     local file, errorString = io.open( path, "r" )
     local cmd = "copy_projects."..ext
+    local cmdFile
 
     if not file then
         print( "File error: " .. errorString )
@@ -55,25 +56,27 @@ function copy_projects(model)
             io.close( file )
         end
         if platform =="win32" then
-            cmd = '"'..path:gsub('/', '\\')..'"'
+            cmdFile = '"'..path:gsub('/', '\\')..'"'
         else
-            cmd = path:gsub(' ','\\ ')
+            cmdFile = path:gsub(' ','\\ ')
         end
     end
 
-    if platform =="win32" then   
-        print("copy "..cmd.." "..system.pathForFile("..\\", system.ResourceDirectory))
-        os.execute("copy "..cmd.." "..system.pathForFile("..\\", system.ResourceDirectory))
+    if platform =="win32" then
+        print("copy "..cmdFile.." "..system.pathForFile("..\\", system.ResourceDirectory))
+        os.execute("copy "..cmdFile.." "..system.pathForFile("..\\", system.ResourceDirectory))
         os.execute("cd "..system.pathForFile("..\\", system.ResourceDirectory) ..' & start cmd /k call '..cmd)
     else
-        os.execute("cp "..cmd.." "..system.pathForFile("../", system.ResourceDirectory))
-        os.execute("cd "..system.pathForFile("..\\", system.ResourceDirectory) ..'; source '..cmd)
+        print("cp "..cmdFile.." "..system.pathForFile("../", system.ResourceDirectory))
+        os.execute("cp "..cmdFile.." "..system.pathForFile("../", system.ResourceDirectory))
+        print("cd "..system.pathForFile("../", system.ResourceDirectory) ..'; source '..cmd)
+        os.execute("cd "..system.pathForFile("../", system.ResourceDirectory) ..'; source '..cmd)
     end
 end
 
 function M.copy_projects (model)
 
-    copy_projects({folder = appFolder, 
+    copy_projects({folder = appFolder,
                 RootProject = ROOT,
                 projects = model})
 end
