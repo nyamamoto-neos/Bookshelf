@@ -80,7 +80,7 @@
     <page id="Shelf">
       <name>Shelf</name>
       <number>1</number>
-      <file>~\Documents\Kwik/BookTOC/Shelf.psd</file>
+      <file>~\Documents\Kwik/Bookshelf/BookTOC/Shelf.psd</file>
       <fileName>Shelf.psd</fileName>
       <trigger id="act_buy">
         <name>act_buy</name>
@@ -103,7 +103,7 @@
     <page id="INFO">
       <number>2</number>
       <name>INFO</name>
-      <file>~\Documents\Kwik/BookTOC/INFO.psd</file>
+      <file>~\Documents\Kwik/Bookshelf/BookTOC/INFO.psd</file>
       <fileName>INFO.psd</fileName>
       <replacement id="infoTxt">
         <name>infoTxt</name>

@@ -1,3 +1,1 @@
- -- BookTOC
-local pages = {isDownloadable = false, pageNum=2 }
-return pages
+ -- BookTOClocal pages = {isDownloadable = false, pageNum=2, isIAP = true }return pages

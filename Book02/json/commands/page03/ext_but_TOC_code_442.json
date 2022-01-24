@@ -1,1 +1,1 @@
-{"arqCode":"local ui = require(\"components.store.UI\")\nui.gotoSceneBook(\"TOC\")","triggerName":"but_TOC_code_442","myLName":""}
+{"arqCode":"","triggerName":"but_TOC_code_442","myLName":""}

@@ -1,0 +1,9 @@
+[submodule "Book01/tmplt"]
+	path = Book01/tmplt
+	url = https://github.com/kwiksher/kwik4tmplt
+[submodule "Book02/tmplt"]
+	path = Book02/tmplt
+	url = https://github.com/kwiksher/kwik4tmplt
+[submodule "BookTOC/tmplt"]
+	path = BookTOC/tmplt
+	url = https://github.com/kwiksher/kwik4tmplt

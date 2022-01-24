@@ -21,11 +21,13 @@ StoreManagerState.Exit = _empty
 local function _default (self, fsm)
     self:Default(fsm)
 end
+StoreManagerState.back = _default
 StoreManagerState.backThumbnail = _default
 StoreManagerState.clickCloseDialog = _default
 StoreManagerState.clickImage = _default
 StoreManagerState.clickImage = _default
 StoreManagerState.clickImage = _default
+StoreManagerState.clickPurchase = _default
 StoreManagerState.clickPurchase = _default
 StoreManagerState.createDialog = _default
 StoreManagerState.exit = _default
@@ -346,6 +348,21 @@ function DialogMap.IAPBadger:backThumbnail (fsm)
     fsm:popState()
 end
 
+function DialogMap.IAPBadger:clickCloseDialog (fsm)
+    local ctxt = fsm.owner
+    fsm:getState():Exit(fsm)
+    fsm:clearState()
+    local r, msg = pcall(
+        function ()
+            ctxt:refreshThumbnail()
+        end
+    )
+    fsm:popState()
+end
+
+function DialogMap.IAPBadger:clickPurchase (fsm)
+end
+
 function DialogMap.IAPBadger:onPurchaseCancel (fsm)
     local ctxt = fsm.owner
     fsm:getState():Exit(fsm)
@@ -437,13 +454,13 @@ function NetworkMap.Downloaded:backThumbnail (fsm)
     fsm:backThumbnail()
 end
 
-function NetworkMap.Downloaded:fromDialog (fsm, id)
+function NetworkMap.Downloaded:fromDialog (fsm, id, version)
     local ctxt = fsm.owner
     fsm:getState():Exit(fsm)
     fsm:clearState()
     local r, msg = pcall(
         function ()
-            ctxt:updateDialog(id)
+            ctxt:updateDialog(id, version)
         end
     )
     fsm:popState()
@@ -451,6 +468,11 @@ function NetworkMap.Downloaded:fromDialog (fsm, id)
 end
 
 NetworkMap.DownloadedError = NetworkMap.Default:new('NetworkMap.DownloadedError', 10)
+
+function NetworkMap.DownloadedError:back (fsm)
+    fsm:getState():Exit(fsm)
+    fsm:popState()
+end
 
 function NetworkMap.DownloadedError:backThumbnail (fsm)
     fsm:getState():Exit(fsm)
@@ -468,6 +490,12 @@ local storeContext = statemap.FSMContext.class()
 
 function storeContext:_init ()
     self:setState(MainMap.INIT)
+end
+
+function storeContext:back ()
+    self.transition = 'back'
+    self:getState():back(self)
+    self.transition = nil
 end
 
 function storeContext:backThumbnail ()
@@ -497,6 +525,12 @@ end
 function storeContext:clickImage (...)
     self.transition = 'clickImage'
     self:getState():clickImage(self, ...)
+    self.transition = nil
+end
+
+function storeContext:clickPurchase ()
+    self.transition = 'clickPurchase'
+    self:getState():clickPurchase(self)
     self.transition = nil
 end
 

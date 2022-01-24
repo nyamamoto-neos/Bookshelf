@@ -54,7 +54,7 @@
     <page id="page1">
       <name>page1</name>
       <number>1</number>
-      <file>~\Documents\Kwik/Book02/page1.psd</file>
+      <file>~\Documents\Kwik/Bookshelf/Book02/page1.psd</file>
       <fileName>page1.psd</fileName>
       <swipePage>true</swipePage>
       <swipeSpacer>120</swipeSpacer>
@@ -75,7 +75,7 @@
     <page id="page2">
       <name>page2</name>
       <number>2</number>
-      <file>~\Documents\Kwik/Book02/page2.psd</file>
+      <file>~\Documents\Kwik/Bookshelf/Book02/page2.psd</file>
       <fileName>page2.psd</fileName>
       <variables>
         <variable id="myVar">
@@ -116,7 +116,7 @@
     <page id="page3">
       <name>page3</name>
       <number>3</number>
-      <file>~\Documents\Kwik/Book02/page3.psd</file>
+      <file>~\Documents\Kwik/Bookshelf/Book02/page3.psd</file>
       <fileName>page3.psd</fileName>
       <button id="but_TOC">
         <name>but_TOC</name>

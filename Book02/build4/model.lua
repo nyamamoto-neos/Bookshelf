@@ -1,3 +1,1 @@
- -- Book02
-local pages = {isDownloadable = true, pageNum=3 }
-return pages
+ -- Book02local pages = {isDownloadable = true, pageNum=3, isIAP = false }return pages

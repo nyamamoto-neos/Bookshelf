@@ -1,0 +1,1 @@
+open "corona://open?url=file:////Users/ymmtny/Documents/Kwik/Multi_Lingual_Sample/build4&skin=iPadMini"

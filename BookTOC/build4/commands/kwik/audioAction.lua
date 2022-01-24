@@ -31,21 +31,45 @@ function _M:recordAudio(duration, mmFile, malfa, sceneGroup, allAudios)
    -- allAudios.playback = nil
 end
 --
-function _M:muteUnmute()
+function _M:muteUnmute(videos)
   if (audio.getVolume() == 0.0) then
      audio.setVolume(1.0)
   else
      audio.setVolume(0.0)
   end
+  if videos then
+      for i=1, #videos do
+        if videos[i].isMuted then
+          videos[i].isMuted = false
+        else
+          videos[i].isMuted = true
+        end
+      end
+  end
 end
 --
-function _M:playAudio(vaudio, vchan, vrepeat, vdelay, vloop, toFade, vvol, tm)
+function _M:playAudio(vaudio, vchan, vrepeat, vdelay, vloop, toFade, vvol, tm, trigger, params)
+  local listener = nil
+  if trigger and string.len(trigger) > 0 then
+    listener = function()
+      Runtime:dispatchEvent({name=trigger, event=params.event, UI=params.UI})
+    end
+  end
+
   local myClosure = function()
     if not vrepeat then
       audio.setVolume(vvol, {channel=vchan} )
-      audio.play( vaudio, {channel=vchan, loops = vloop, fadein = tofade } )
+      if toFade > 0 then
+        audio.play( vaudio, {channel=vchan, loops = vloop, fadein = toFade, onComplete = listener } )
+      else
+        audio.play( vaudio, {channel=vchan, loops = vloop,  onComplete = listener } )
+      end
     else
-      _M.x9[vaudio] = audio.play( vaudio, {loops = vloop, fadein = tofade } )
+      if toFade  > 0 then
+        _M.x9[vaudio] = audio.play( vaudio, {channel=vchan, loops = vloop, fadein = toFade, onComplete = listener } )
+      else
+        _M.x9[vaudio] = audio.play( vaudio, {channel=vchan, loops = vloop, onComplete = listener } )
+      end
       audio.setVolume(vvol, {channel=_M.x9[vaudio]} )
     end
   end
@@ -61,7 +85,11 @@ function _M:rewindAudio( vaudio, vchan, vrepeat)
   if not vrepeat then
     audio.rewind( vchan )
   else
-    audio.rewind( _M.x9[vaudio] )
+    if _M.x9[vaudio] then
+      audio.rewind( _M.x9[vaudio] )
+    else
+      audio.rewind( vchan )
+    end
   end
 end
 --
@@ -70,7 +98,11 @@ function _M:pauseAudio(vaduio, vchan, vrepeat)
     if not vrepeat then
       audio.pause( vchan )
     else
-      audio.pause( _M.x9[vaudio] )
+      if _M.x9[vaudio] then
+        audio.pause( _M.x9[vaudio] )
+      else
+        audio.pause( vchan )
+      end
     end
   end )
 end
@@ -80,8 +112,13 @@ function _M:stopAudio(vaduio, vchan, vrepeat)
     audio.rewind( vchan )
     audio.stop( vchan )
   else
-    audio.rewind( _M.x9[vaudio])
-    audio.stop( _M.x9[vaudio] )
+    if _M.x9[vaudio] then
+      audio.rewind( _M.x9[vaudio])
+      audio.stop( _M.x9[vaudio] )
+    else
+      audio.rewind( vchan )
+      audio.stop( vchan )
+    end
   end
 end
 --
@@ -89,7 +126,11 @@ function _M:resumeAudio(vaduio, vchan, vrepeat)
   if not vrepeat then
     audio.resume( vchan )
   else
-    audio.resume( _M.x9[vaudio] )
+    if _M.x9[vaudio] then
+      audio.resume( _M.x9[vaudio] )
+    else
+      audio.resume( vchan )
+    end
   end
 end
 --
