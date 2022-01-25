@@ -55,7 +55,6 @@ function M.new()
                 copyDisplayObject(self.layer.downloadBtn, button, episode.name, self.sceneGroup)
             button.savingTxt = copyDisplayObject(self.layer.savingTxt, button, episode.name, self.sceneGroup)
         end
-        print("1")
         button.savedBtn = copyDisplayObject(self.layer.savedBtn, button, episode.name, self.sceneGroup)
         if model.bookShelfType == 0 then -- pages
             if cmd.hasDownloaded(episode.name) then
@@ -64,28 +63,23 @@ function M.new()
                 button.purchaseBtn.alpha = 1
             end
         end
-        print("2")
         if episode.isFree then
             button.purchaseBtn.alpha = 0
         end
         --
         -- button image
         --
-        print("3")
         if episode.isOnlineImg then
             cmd:setButtonImage(button, episode.name, lang)
         end
 
-        print("4")
         if cmd.isUpdateAvailableInVersions(episode.name) then
             setUpdateMark(button, self.sceneGroup)
         end
         --
         -- label
         --
-        print("5")
         if episode.isOnlineImg and label then
-            print("-------label------")
             cmd:setButtonImage(label, episode.name, lang)
         end
     end
@@ -238,7 +232,7 @@ end
         bookXXIcon.selectedPurchase = episode.name
         bookXXIcon.selectedVersion = episode.selectedVersion
 
-        print("createDialog with", episode.name, episode.selectedVersion, episode.isOnlineImg)
+        print("", "createDialog with", episode.name, episode.selectedVersion, episode.isOnlineImg)
 
         --If the user has purchased the episode before, change the bookXXIcon
         bookXXIcon.purchaseBtn = copyDisplayObject(self.layer.purchaseBtn, nil, episode, self.sceneGroup)
@@ -256,7 +250,10 @@ end
         if episode.isOnlineImg then
             cmd:setButtonImage(bookXXIcon, episode.name, lang)
         else
-            local src = self.layer[episode.name.."Icon"] or self.layer[episode.name.."_"..lang]
+            local src = self.layer[episode.name.."Icon"]
+            if lang then
+                src = self.layer[episode.name.."_"..lang]
+            end
             if src then
                 --print(src.imagePath)
                 bookXXIcon.fill = {
@@ -267,7 +264,6 @@ end
             end
         end
         bookXXIcon.alpha = 1
-
     end
     ---
     function VIEW:createDialog(episode, isPurchased, isDownloaded)
@@ -286,14 +282,25 @@ end
         end
         --
         self.episode = episode
-        print("VIEW:createDialog", episode.name)
-        local bookXXIcon = self.layer[episode.name.."Icon"] or self.layer[episode.name.."_"..episode.selectedVersion]
+        print("VIEW:createDialog", episode.name, episode.selectedVersion)
+        local bookXXIcon = self.layer[episode.name.."Icon"]
+
+        if episode.selectedVersion then
+            bookXXIcon = self.layer[episode.name.."_"..episode.selectedVersion]
+        end
+
         if model.bookShelfType == 0 then
             bookXXIcon = self.layer[episode.name .. "Icon"]
         end
 
+        if bookXXIcon == nil then
+            bookXXIcon = self.layer["bookXXIcon"]
+        end
+
         if bookXXIcon then
             setDialogButton(bookXXIcon, episode, self, episode.selectedVersion)
+        else
+            print("Error View:createDialog")
         end
         --
         if episode.versions then
@@ -332,7 +339,6 @@ end
                 bookXXIcon.downloadBtn = copyDisplayObject(self.layer.downloadBtn, nil, episode, self.sceneGroup)
             end
         end
-
     end
     --
     --
@@ -440,10 +446,18 @@ end
     --
     --
     function VIEW:controlDialog(episode, isPurchased, isDownloaded)
-        local bookXXIcon = self.layer[episode.name.."Icon"] or self.layer[episode.name.."_"..episode.selectedVersion]
+        local bookXXIcon = self.layer[episode.name.."Icon"]
+        if episode.selectedPurchase then
+            bookXXIcon = self.layer[episode.name.."_"..episode.selectedVersion]
+        end
         if model.bookShelfType == 0 then
             bookXXIcon = self.layer[episode.name .. "Icon"]
         end
+
+        if bookXXIcon == nil then
+            bookXXIcon = self.layer["bookXXIcon"]
+        end
+
         if bookXXIcon then
             bookXXIcon.episode = episode
             if isPurchased then
