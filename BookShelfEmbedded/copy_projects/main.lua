@@ -26,7 +26,8 @@ local function onComplete( event )
         local i = event.index
         if ( i == 1 ) then
           command.copy_projects(model)
-          native.showAlert( "Kwik", "Done", { "OK", "Cancel" }, 
+          command.copy_components(model)
+          native.showAlert( "Kwik", "Done", { "OK", "Cancel" },
             function()
               native.requestExit()
             end )

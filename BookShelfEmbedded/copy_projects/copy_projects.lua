@@ -81,5 +81,82 @@ function M.copy_projects (model)
                 projects = model})
 end
 
+local moveDir = nil
+
+local function moveAll(rootDir, dstDir)
+    local file = nil
+    for file in lfs.dir( rootDir ) do
+        if file and file:len() > 2 then
+            moveDir(rootDir, dstDir, file)
+        end
+    end
+end
+
+moveDir = function(rootDir, dstDir, file)
+    local src = rootDir.."/"..file
+    local dst = dstDir .."/"..file
+    if platform =="win32" then
+        dst = dst:gsub('/', '\\')
+    else
+        dst = dst:gsub(' ','\\ ')
+    end
+    -- simply one level below
+    if lfs.attributes( src, "mode" ) == "directory" then
+        moveAll(src, dst)
+    else
+        local result, reason = os.rename(src,dst)
+        if( not result ) then
+            print("", "error", reason)
+            print("", src, dst)
+        else
+            print( "moved:" .. src)
+        end
+    end
+end
+
+function M.copy_components(model)
+    local lfs = require( "lfs" )
+     -- Get raw path to the app documents directory
+    local rootDir, distDir
+    local file = nil
+    for k, v in pairs(model) do
+        rootDir = system.pathForFile( "../App/"..v.appFolder.."/components", system.ResourceDirectory )
+        dstDir = system.pathForFile("../components",system.ResourceDirectory)
+        for file in lfs.dir( rootDir ) d
+            local isKwk = file:find("kwik")
+            local isPage = file:find("page")
+            local isStore = file:find("store")
+            if not isPage and file:len() > 2 then
+                if not (isStore or isKwik) then
+                    moveDir(rootDir, dstDir, file)
+                end
+                -- if v.appFolder=="TOC" then
+                --     if not isKwik then
+                --         moveDir(rootDir, dstDir, file)
+                --     end
+                -- else
+                --     if not (isStore or isKwik) then
+                --         moveDir(rootDir, dstDir, file)
+                --     end
+                -- end
+            end
+        end
+        --
+        rootDir = system.pathForFile( "../App/"..v.appFolder.."/commands", system.ResourceDirectory )
+        dstDir = system.pathForFile("../commands",system.ResourceDirectory)
+        for file in lfs.dir( rootDir ) do
+            -- local isKwk = file:find("kwik")
+            local isPage = file:find("page")
+            if (not isPage) and file:len() > 2 then
+                moveDir(rootDir, dstDir, file)
+            end
+        end
+        --
+        rootDir = system.pathForFile( "../App/"..v.appFolder.."/extlib", system.ResourceDirectory )
+        dstDir = system.pathForFile("../extlib",system.ResourceDirectory)
+        moveAll(rootDir, dstDir)
+    end
+end
+
 return M
 
