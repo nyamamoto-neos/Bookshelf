@@ -56,6 +56,7 @@ startThisMug = function()
         end
         package.loaded["mediators.ApplicationMediator"] = require("KwikShelf.mediators.ApplicationMediator")
         package.loaded["model"] = require("Kwikshelf.model")
+
     end
     ---
     local function bootstrap(appName)
@@ -144,7 +145,7 @@ Runtime:addEventListener("changeThisMug",
                 package.loaded["components.page0"..i.."UI"]       = nil
                 myunload(".components.page0%sUI",i)
                 package.loaded["views.page0"..i.."Scene"]         = nil
-                -- myunload(".views.page0%sScene",i)
+                myunload(".views.page0%sScene",i)
             end
             package.loaded["mediators.ApplicationMediator"] = nil
             package.loaded["KwikShelf.mediators.ApplicationMediator"] = nil
@@ -155,6 +156,10 @@ Runtime:addEventListener("changeThisMug",
             package.loaded["commands.kwik.animationAction"] = nil
             package.loaded["commands.kwik.actionCommand"] = nil
             package.loaded["commands.kwik.languageAction"] = nil
+            -- store UI
+            -- this has a reference to App.TOC or bookXX, so need to unload it
+            package.loaded["components.store.UI"] = nil
+
 
 
             --package.loaded["extlib.statemap"] = nil

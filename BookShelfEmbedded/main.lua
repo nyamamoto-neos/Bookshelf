@@ -3,5 +3,5 @@
 -- Version: 4.0.2 01
 -- Project: HelloWorld
 --
-require("KwikShelf.lib").start("TOC", 1)
+require("KwikShelf.library").start("TOC", 1)
 

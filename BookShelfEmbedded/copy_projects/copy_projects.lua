@@ -122,23 +122,23 @@ function M.copy_components(model)
     for k, v in pairs(model) do
         rootDir = system.pathForFile( "../App/"..v.appFolder.."/components", system.ResourceDirectory )
         dstDir = system.pathForFile("../components",system.ResourceDirectory)
-        for file in lfs.dir( rootDir ) d
-            local isKwk = file:find("kwik")
+        for file in lfs.dir( rootDir ) do
+            local isKwik = file:find("kwik")
             local isPage = file:find("page")
             local isStore = file:find("store")
+
             if not isPage and file:len() > 2 then
-                if not (isStore or isKwik) then
-                    moveDir(rootDir, dstDir, file)
+                if v.appFolder=="TOC" then
+                    if not isKwik then
+                       -- print(rootDir, dstDir, file)
+                       moveDir(rootDir, dstDir, file)
+                    end
+                else
+                    if not (isStore or isKwik) then
+                       -- print(rootDir, dstDir, file)
+                       moveDir(rootDir, dstDir, file)
+                    end
                 end
-                -- if v.appFolder=="TOC" then
-                --     if not isKwik then
-                --         moveDir(rootDir, dstDir, file)
-                --     end
-                -- else
-                --     if not (isStore or isKwik) then
-                --         moveDir(rootDir, dstDir, file)
-                --     end
-                -- end
             end
         end
         --
@@ -147,7 +147,9 @@ function M.copy_components(model)
         for file in lfs.dir( rootDir ) do
             -- local isKwk = file:find("kwik")
             local isPage = file:find("page")
-            if (not isPage) and file:len() > 2 then
+            local isKwik = file:find("kwik")
+            local isApp = file:find("app")
+            if (not isApp) and (not isKwik) and (not isPage) and file:len() > 2 then
                 moveDir(rootDir, dstDir, file)
             end
         end

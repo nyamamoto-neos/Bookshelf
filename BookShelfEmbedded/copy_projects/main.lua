@@ -20,6 +20,14 @@ local model = {
   }
 --]]
 
+--
+-- Files under App/TOC/components/store are moved to components/store
+-- you can edit the debug flag in  components/store/model.lua
+--
+-- If the components folder of TOC, BookXX contains sub folder like crosswaord, tiledmap etc,
+-- the sub folders are moved to the omponents of the root. This solves references of require()
+--
+
 ---
 local function onComplete( event )
     if ( event.action == "clicked" ) then
