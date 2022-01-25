@@ -14,8 +14,8 @@
     <pinch>false</pinch>
     <thumbs>false</thumbs>
     <navigation>false</navigation>
-    <pageCurl>true</pageCurl>
-    <swipeSpacer>400</swipeSpacer>
+    <pageCurl>false</pageCurl>
+    <swipeSpacer>120</swipeSpacer>
     <thumbW>200</thumbW>
     <navDirection>Top</navDirection>
     <thumbH>133</thumbH>
@@ -49,6 +49,9 @@
     <infoPage>2</infoPage>
     <iapDebug>true</iapDebug>
     <kwik3Tp>false</kwik3Tp>
+    <keyNav>false</keyNav>
+    <domains/>
+    <splashCtl>false</splashCtl>
   </settings>
   <pages>
     <page id="page1">
@@ -91,6 +94,23 @@
       <scrnDelay>200</scrnDelay>
       <scrnFrames>20</scrnFrames>
       <inApp/>
+      <button id="but_139">
+        <name>but_139</name>
+        <layer>gotoBtn</layer>
+        <rollover>gotoBtn</rollover>
+        <target>Layer</target>
+        <type>Tap</type>
+        <tap>1</tap>
+        <mask>false</mask>
+        <action id="goPage_384">
+          <name>goPage_384</name>
+          <type>Go to Page</type>
+          <page>page6</page>
+          <transition>Zoom In Out Rotate</transition>
+          <wait>0</wait>
+          <duration>0</duration>
+        </action>
+      </button>
     </page>
     <page id="page2">
       <name>page2</name>
@@ -192,7 +212,7 @@
           <name>code_486</name>
           <type>External Code</type>
           <code/>
-          <extFile>~/Documents/Kwik/Book01/gotoTOC.lua</extFile>
+          <extFile>~/Documents/Kwik/Bookshelf/Book01/gotoTOC.lua</extFile>
         </action>
       </button>
       <button id="but_title">
@@ -221,7 +241,7 @@
           <name>code_014</name>
           <type>External Code</type>
           <code/>
-          <extFile>~/Documents/Kwik/Book01/gotoNextBook.lua</extFile>
+          <extFile>~/Documents/Kwik/Bookshelf/Book01/gotoNextBook.lua</extFile>
         </action>
       </button>
       <button id="but_PrevBook">
@@ -235,7 +255,7 @@
           <name>code_273</name>
           <type>External Code</type>
           <code/>
-          <extFile>~/Documents/Kwik/Book01/gotoPrevBook.lua</extFile>
+          <extFile>~/Documents/Kwik/Bookshelf/Book01/gotoPrevBook.lua</extFile>
         </action>
       </button>
       <swipePage>true</swipePage>
@@ -252,7 +272,7 @@
       <scrnSave>false</scrnSave>
       <scrnDelay>200</scrnDelay>
       <scrnFrames>20</scrnFrames>
-      <inApp></inApp>
+      <inApp/>
     </page>
   </pages>
 </project>

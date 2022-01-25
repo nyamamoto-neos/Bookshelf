@@ -59,7 +59,7 @@ zip -r $fol/p1/sprites.zip
 zip -r $fol/p1/particles.zip 
 zip -r $fol/p1/WWW.zip 
 zip -r $fol/p1/thumbnails.zip 
-zip -r $fol/p1/images.zip images/p1/bg@4x.png images/p1/bg@2x.png images/p1/bg.png 
+zip -r $fol/p1/images.zip images/p1/bg@4x.png images/p1/bg@2x.png images/p1/bg.png images/p1/gotobtn@4x.png images/p1/gotobtn@2x.png images/p1/gotobtn.png 
 zip -r $fol/p1/shared.zip 
 zip -r $fol/p2/audios.zip 
 zip -r $fol/p2/read2me.zip 

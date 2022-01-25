@@ -1,1 +1,1 @@
-{"arqCode":"","triggerName":"but_NextBook_code_761","myLName":""}
+{"arqCode":"local ui = require(\"components.store.UI\")\nui.gotoSceneNextBook()","triggerName":"but_NextBook_code_761","myLName":""}

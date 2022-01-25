@@ -1,1 +1,1 @@
-{"mediators":[{"view":"views.page01Scene","mediator":"mediators.page01Mediator","custom":""}],"commands":[]}
+{"mediators":[{"view":"views.page01Scene","mediator":"mediators.page01Mediator","custom":""}],"commands":[{"event":"page01.gotoBtn_button_but_139","command":"commands.page01.gotoBtn_button_but_139","custom":""}]}

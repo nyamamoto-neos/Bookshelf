@@ -129,7 +129,7 @@
           <name>code_442</name>
           <type>External Code</type>
           <code/>
-          <extFile>~/Documents/Kwik/Book02/gotoTOC.lua</extFile>
+          <extFile>~/Documents/Kwik/Bookshelf/Book02/gotoTOC.lua</extFile>
         </action>
       </button>
       <button id="but_title">
@@ -158,7 +158,7 @@
           <name>code_761</name>
           <type>External Code</type>
           <code/>
-          <extFile>~/Documents/Kwik/Book02/gotoNextBook.lua</extFile>
+          <extFile>~/Documents/Kwik/Bookshelf/Book02/gotoNextBook.lua</extFile>
         </action>
       </button>
       <button id="but_PrevBook">
@@ -172,7 +172,7 @@
           <name>code_279</name>
           <type>External Code</type>
           <code/>
-          <extFile>~/Documents/Kwik/Book02/gotoPrevBook.lua</extFile>
+          <extFile>~/Documents/Kwik/Bookshelf/Book02/gotoPrevBook.lua</extFile>
         </action>
       </button>
       <swipePage>true</swipePage>
