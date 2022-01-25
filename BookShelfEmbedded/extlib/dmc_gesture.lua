@@ -1,4 +1,4 @@
---===================================================================
+--===================================================================--
 -- dmc_touch.lua
 --
 -- by David McCuskey
@@ -268,7 +268,7 @@ Gesture.activate = function( obj, params )
 
 	-- sanity check
 	if obj.__dmc and obj.__dmc.gesture then
---		print( "WARNING: only initialize Gesture once !" )
+		print( "WARNING: only initialize Gesture once !" )
 		return nil
 	end
 

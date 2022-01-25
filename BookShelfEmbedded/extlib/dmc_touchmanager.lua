@@ -43,7 +43,7 @@ local VERSION = "0.1.0"
 -- Setup, Constants
 --===================================================================--
 
---system.activate("multitouch")
+system.activate("multitouch")
 
 local TouchManager = nil
 local touchHandler = nil
