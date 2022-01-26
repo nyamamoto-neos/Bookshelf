@@ -1,7 +1,6 @@
 local M = {}
 
 function M.new (dst, group)
-    print("makker")
     print(dst, group)
     if dst.updateMark == nil then
         local obj = display.newCircle(0,0,4)

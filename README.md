@@ -4,6 +4,34 @@ This Bookshelf folder is Project Root Folder of Kwik.
 
 <img src="./img/2022-01-24-14-49-08.png" width="600">
 
+Work cicle if updates are available
+
+1. Update tmplt
+
+    tmpl folder of Boo01, Book02, BookTOC is the git submoule of [kwik4tmplt](https://github.com/kwiksher/kwik4tmplt)
+
+    ```
+    git submodule update --remote
+    ```
+
+1. Publish Book01, Book02, BookTOC with Kwik
+
+    use export images off. If you don't change layer images of psd files
+
+1. Update assets.zip files in BookServer
+
+   Open compress_assets/main.lua with Solar2D
+
+   run http-server
+
+1. Update src files of BookshelfEmbedded
+
+    Open copy_projects/main.lua with Solar2D
+
+    > this will overwrite the lua files from BookTOC/build4, Book01/build4, Book02/build4
+
+    > Beaware the files in components/store folders are updated by this copy_projects. Previous local changes in that folder will be lost such as model.lua's debug flag
+
 ### BookServer
 
 BookServer folder contains the following folders

@@ -1,1 +1,1 @@
-open "corona://open?url=file:////Users/ymmtny/Documents/Kwik/BookshelfVersions/Book02jp/build4&skin=iPadMini"
+open "corona://open?url=file:////Users/ymmtny/Documents/Kwik/BookshelfVersions/BookTOC/build4&skin=iPadMini"
