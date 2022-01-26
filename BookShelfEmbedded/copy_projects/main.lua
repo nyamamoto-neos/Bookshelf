@@ -1,5 +1,8 @@
 -- copyright 2022, kwiksher
 local command = require("copy_projects")
+
+command.setServerFolder("App", "BookShelfEmbedded")
+
 --
 local model = {
     {project = "BookTOC", appFolder = "TOC", suffix="", downloadable=false},

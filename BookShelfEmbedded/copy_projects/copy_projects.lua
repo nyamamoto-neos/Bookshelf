@@ -120,7 +120,7 @@ function M.copy_components(model)
     local rootDir, distDir
     local file = nil
     for k, v in pairs(model) do
-        rootDir = system.pathForFile( "../App/"..v.appFolder.."/components", system.ResourceDirectory )
+        rootDir = system.pathForFile( "../App/"..v.appFolder..v.suffix.."/components", system.ResourceDirectory )
         dstDir = system.pathForFile("../components",system.ResourceDirectory)
         for file in lfs.dir( rootDir ) do
             local isKwik = file:find("kwik")
@@ -142,7 +142,7 @@ function M.copy_components(model)
             end
         end
         --
-        rootDir = system.pathForFile( "../App/"..v.appFolder.."/commands", system.ResourceDirectory )
+        rootDir = system.pathForFile( "../App/"..v.appFolder..v.suffix.."/commands", system.ResourceDirectory )
         dstDir = system.pathForFile("../commands",system.ResourceDirectory)
         for file in lfs.dir( rootDir ) do
             -- local isKwk = file:find("kwik")
@@ -154,7 +154,7 @@ function M.copy_components(model)
             end
         end
         --
-        rootDir = system.pathForFile( "../App/"..v.appFolder.."/extlib", system.ResourceDirectory )
+        rootDir = system.pathForFile( "../App/"..v.appFolder..v.suffix.."/extlib", system.ResourceDirectory )
         dstDir = system.pathForFile("../extlib",system.ResourceDirectory)
         moveAll(rootDir, dstDir)
     end
