@@ -55,7 +55,7 @@ startThisMug = function()
             package.loaded["views.page0"..i.."Scene"]         = myrequire(".views.page0%sScene",i)
         end
         package.loaded["mediators.ApplicationMediator"] = require("KwikShelf.mediators.ApplicationMediator")
-        package.loaded["model"] = require("Kwikshelf.model")
+        package.loaded["model"] = require("KwikShelf.model")
 
     end
     ---
