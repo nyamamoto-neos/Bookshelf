@@ -156,6 +156,7 @@ Runtime:addEventListener("changeThisMug",
             package.loaded["commands.kwik.animationAction"] = nil
             package.loaded["commands.kwik.actionCommand"] = nil
             package.loaded["commands.kwik.languageAction"] = nil
+            package.loaded["commands.kwik.screenshotAction"] = nil
             -- store UI
             -- this has a reference to App.TOC or bookXX, so need to unload it
             package.loaded["components.store.UI"] = nil
